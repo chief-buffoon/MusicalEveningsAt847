@@ -10,6 +10,9 @@
 
 const iframe = document.getElementById('childIframe'); 
 
+// Get query parameters from the URL (window.location.search) 
+const queryParams = new URLSearchParams(window.location.search); 
+
 const id = queryParams.get('id')
 if (id) {
 	// Define parameters to pass 
