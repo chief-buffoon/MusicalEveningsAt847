@@ -10,18 +10,19 @@
 
 const iframe = document.getElementById('childIframe'); 
 
-// Define parameters to pass 
-const params = { id: '', response: ''}; 
+const id = queryParams.get('id')
+if (id) {
+	// Define parameters to pass 
+	const params = { id: id, response: queryParams.get('response')}; 
 
-// Convert params to query string
-const queryString = new URLSearchParams(params).toString(); 
+	// Convert params to query string
+	const queryString = new URLSearchParams(params).toString(); 
 
-if (params.id = '') {
-	// Set iframe src with query parameters 
-	iframe.src = `https://sway.com/s/qW0DjvQVXCjbCbus/embed`; 
-} else {
 	// Set iframe src with query parameters 
 	iframe.src = `https://script.google.com/macros/s/AKfycby_44SJcJy_Sb7s8wBO9APGYPz3mks4R7-OouT2zHIsRqApuw4WwuFdPctAryBFwbOc/exec?${queryString}`; 
+} else {
+	// Set iframe src with query parameters 
+	iframe.src = `https://sway.com/s/qW0DjvQVXCjbCbus/embed`; 
 }
 
 </script>
