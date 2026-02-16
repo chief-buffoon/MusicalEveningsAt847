@@ -14,9 +14,7 @@ const iframe = document.getElementById('childIframe');
 const params = { id: '', response: ''}; 
 
 // Convert params to query string
-
-const params = new URLSearchParams(params); 
-const queryString = params.toString(); 
+const queryString = new URLSearchParams(params).toString(); 
 
 if (params.id = '') {
 	// Set iframe src with query parameters 
