@@ -58,6 +58,9 @@
 			return null;
 		}
 
+		// Get query parameters from the URL (window.location.search) 
+		const queryParams = new URLSearchParams(window.location.search);
+
 		var id = queryParams.get('id')
 		if (id) {
 			setCookie('id', id, 45); // Sets as a cookie for 45 days
@@ -74,9 +77,6 @@
 	<script>
 		// Get the iframe element 
 		const iframe = document.getElementById('childIframe');
-
-		// Get query parameters from the URL (window.location.search) 
-		const queryParams = new URLSearchParams(window.location.search);
 
 		if (id) {
 			// Define parameters to pass 
