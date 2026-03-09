@@ -6,20 +6,22 @@
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 	<style type="text/css">
-		body,
-		html {
+		html, body {
 			margin: 0;
 			padding: 0;
 			height: 100%;
-			overflow: hidden;
+			overflow: auto;
 		}
 
-		#content {
+		#childIframe {
 			position: absolute;
 			left: 0;
 			right: 0;
+			top: 0;
 			bottom: 0;
-			top: 0px;
+			border: 0;
+			width: 100%;
+			height: 100%;
 		}
 	</style>
 </head>
@@ -28,9 +30,9 @@
 
 	<!-- Iframe element -->
 	<iframe id="childIframe" width="100%" height="100%" 
-		frameborder="0" marginheight="0" marginwidth="0" max-width="100%"
+		max-width="100%"
 		sandbox="allow-forms allow-modals allow-orientation-lock allow-popups allow-same-origin allow-scripts"
-		scrolling="no" allowfullscreen mozallowfullscreen
+		allowfullscreen mozallowfullscreen
 		msallowfullscreen webkitallowfullscreen></iframe>
 
 	<script>
@@ -45,7 +47,7 @@
 			// Define parameters to pass 
 			const params = { id: id };
 
-			response = queryParams.get('response')
+			const response = queryParams.get('response')
 			if (response) {
 				params.response = response;
 			}
@@ -54,9 +56,10 @@
 			const queryString = new URLSearchParams(params).toString();
 
 			// Set iframe src with query parameters 
-			if (window.innerHeight >= 900) iframe.height = '900px';
+			if (window.innerHeight >= 900) iframe.style.height = '900px';
 			iframe.src = `https://script.google.com/macros/s/AKfycbwV8YQChOJzBchS9kKMhBjStUzdVBTcGs1P1TaiPK7K38RZ6VdR6diKlHAHLOhaUKTUwg/exec?${queryString}`;
 		} else {
+			iframe.style.height = '100%';
 			iframe.src = 'https://sway.cloud.microsoft/s/URXPCzrQmPUmolMG/embed';
 		}
 
