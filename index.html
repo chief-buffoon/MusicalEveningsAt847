@@ -60,6 +60,7 @@
 			iframe.src = `https://script.google.com/macros/s/AKfycbwV8YQChOJzBchS9kKMhBjStUzdVBTcGs1P1TaiPK7K38RZ6VdR6diKlHAHLOhaUKTUwg/exec?${queryString}`;
 		} else {
 			iframe.style.height = '100%';
+			iframe.setAttribute('scrolling', 'no');
 			iframe.src = 'https://sway.cloud.microsoft/s/URXPCzrQmPUmolMG/embed';
 		}
 
