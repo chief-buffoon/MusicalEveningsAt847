@@ -58,22 +58,38 @@
 			return null;
 		}
 
+		function isAndroid() {
+			// Use a regular expression to test for the presence of "Android" in the user agent string, case-insensitively.
+			const userAgent = navigator.userAgent;
+			return /android/i.test(userAgent);
+		}
+
 		// Get query parameters from the URL (window.location.search) 
 		const queryParams = new URLSearchParams(window.location.search);
+		const android = isAndroid();
+
+		// Define parameters to pass 
+		const params = { id: id, android: android };
+
+		const response = queryParams.get('response')
+		if (response) {
+			params.response = response;
+		}
+
+		// Convert params to query string
+		const queryString = new URLSearchParams(params).toString();
+		const rsvpPageUrl = `https://script.google.com/macros/s/AKfycbwV8YQChOJzBchS9kKMhBjStUzdVBTcGs1P1TaiPK7K38RZ6VdR6diKlHAHLOhaUKTUwg/exec?${queryString}`;
 
 		var id = queryParams.get('id')
 		if (id) {
 			setCookie('id', id, 45); // Sets as a cookie for 45 days
+			if (android){
+				window.location.href = rsvpPageUrl; // Redirect to RSVP page immediately on Android
+			}
 //		} else {
 //			id = getCookie('id'); // Try to get from cookie if not in URL
 		}
 
-		function isAndroid() {
-			// Use a regular expression to test for the presence of "Android" in the user agent string, case-insensitively.
-			const userAgent = navigator.userAgent;
-			return true;
-			return /android/i.test(userAgent);
-		}
 	</script>
 
 	<!-- Iframe element -->
@@ -86,20 +102,9 @@
 		const iframe = document.getElementById('childIframe');
 
 		if (id) {
-			// Define parameters to pass 
-			const params = { id: id };
-
-			const response = queryParams.get('response')
-			if (response) {
-				params.response = response;
-			}
-
-			// Convert params to query string
-			const queryString = new URLSearchParams(params).toString();
-
 			// Set iframe src with query parameters 
 			if (window.innerHeight >= 900) iframe.style.height = '100vh';
-			iframe.src = `https://script.google.com/macros/s/AKfycbwV8YQChOJzBchS9kKMhBjStUzdVBTcGs1P1TaiPK7K38RZ6VdR6diKlHAHLOhaUKTUwg/exec?${queryString}`;
+			iframe.src = rsvpPageUrl;
 		} else {
 			iframe.style.height = '100%';
 			iframe.setAttribute('scrolling', 'no');
