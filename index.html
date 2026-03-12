@@ -69,6 +69,7 @@
 		const android = isAndroid();
 
 		// Define parameters to pass 
+		var id = queryParams.get('id')
 		const params = { id: id, android: android };
 
 		const response = queryParams.get('response')
@@ -80,7 +81,6 @@
 		const queryString = new URLSearchParams(params).toString();
 		const rsvpPageUrl = `https://script.google.com/macros/s/AKfycbwV8YQChOJzBchS9kKMhBjStUzdVBTcGs1P1TaiPK7K38RZ6VdR6diKlHAHLOhaUKTUwg/exec?${queryString}`;
 
-		var id = queryParams.get('id')
 		if (id) {
 			setCookie('id', id, 45); // Sets as a cookie for 45 days
 			if (android){
